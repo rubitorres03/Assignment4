@@ -15,7 +15,7 @@ long long seriesRecursive(int n) {
     }
 
     // Recursive case
-    return seriesRecursive(n - 1) + 2* seriesRecursive(n-2)+ 4 * seriesRecursive(n-3);
+    return seriesRecursive(n - 1) + 2 * seriesRecursive(n-2) + 4 * seriesRecursive(n-3);
 }
 
 
