@@ -25,6 +25,81 @@ void LinkedBag<ItemType>::sort(int method){
 	}
 }
 
+template<class ItemType>
+ Node<ItemType>* LinkedBag<ItemType>::getTail(Node<ItemType>* current){	//get tail
+	while (current != nullptr && current->getNext() != nullptr){
+		current = current->getNext();
+	}
+	return current;
+}
+
+template<class ItemType>
+Node<ItemType>* LinkedBag<ItemType>::partition(Node<ItemType>* head, Node<ItemType>** newHead, 
+	Node<ItemType>** newEnd){
+		Node<ItemType>* pivot = head;
+		Node<ItemType>* prev = nullptr;
+		Node<ItemType>* curr = head->getNext();
+		Node<ItemType>* tail = pivot;
+
+		// partition, both head and end list might change
+		while (curr != nullptr){
+			if (curr->getItem() < pivot->getItem()){
+				// move curr to head
+				if (*newHead == nullptr){
+					*newHead = curr;
+				
+				prev = curr;
+				curr = curr->getNext();
+
+			} else {
+				// move curr to tail
+				if (prev != nullptr){
+					prev->setNext(curr->getNext());
+				else 
+					head = curr->getNext();
+		}
+
+				Node<ItemType>* temp = curr->getNext();
+				curr->setNext(nullptr);
+				tail->setNext(curr);
+				tail = curr;
+				curr = temp;
+			}
+		}
+
+		if (*newHead == nullptr){
+			*newHead = pivot;
+		}
+		*newEnd = tail;
+		return pivot;
+	}
+
+template<class ItemType>
+Node<ItemType>* LinkedBag<ItemType>::quickSortRec(Node<ItemType>* head, Node<ItemType>* end){
+	if (head == nullptr || head == end) return head;  // Base case: empty or single element list
+	Node<ItemType> *newHead = nullptr;
+	Node<ItemType> *newEnd = nullptr;
+	// Partition the list around a pivot
+	Node<ItemType>* pivot = partition(head, &newHead, &newEnd);
+	// pivot is not the first element, recursively sort the left part
+	if (newHead != pivot){
+		Node<ItemType>* temp = newHead;
+		// Recursively sort the list before the pivot
+		while (temp->getNext() != pivot){
+			temp = temp->getNext();
+		}
+		temp->setNext(nullptr);
+		newHead = quickSortRec(newHead, temp);
+
+		// Connect sorted part to pivot
+		Node<ItemType>* tail = getTail(newHead);
+		tail->setNext(pivot);
+	}
+	// Recursively sort the right part
+	pivot->setNext(quickSortRec(pivot->getNext(), newEnd));
+	return newHead;
+}
+
 //TO DO: implement merge sort and change its prototype if you need to.
 template<class ItemType>
 void LinkedBag<ItemType>::mergeSort(){
@@ -42,13 +117,13 @@ Node<ItemType>* LinkedBag<ItemType>::mergeSortRec(Node<ItemType>* head){
 	//split list into two halves
 	Node<ItemType>* slow = head;
 	Node<ItemType>* fast = head->getNext();
-	while. (fast != nullptr && fast->getNext != nullptr){
+	while (fast != nullptr && fast->getNext() != nullptr){
 		slow = slow->getNext();
 		fast = fast->getNext()->getNext();
 	}
 
 	//slow before middle node
-	Node<ItemType>* mid = slow->getNext();
+	Node<ItemType> * mid = slow->getNext();
 	slow->setNext(nullptr);
 
 	Node<ItemType>* left = mergeSortRec(head);
@@ -77,6 +152,7 @@ Node<ItemType>* LinkedBag<ItemType>::mergeLists(Node<ItemType>* a, Node<ItemType
 //                       if you need to.
 template<class ItemType>
 void LinkedBag<ItemType>::quickSort(){
+	headPtr = quickSortRec(headPtr, nullptr);
 	
 }
 // --------------------------------------------------------------
@@ -279,6 +355,5 @@ Node<ItemType>* LinkedBag<ItemType>::getPointerTo(const ItemType& anEntry) const
 	
 	return curPtr;
 } // end getPointerTo
-template class LinkedBag<int>;
 
 

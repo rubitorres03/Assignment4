@@ -38,9 +38,10 @@ class LinkedBag : public BagInterface<ItemType>{
 		// EXTRA CREDIT 
 		// TO DO: update prototype of quick sort based on your implementation
 		void quickSort();
-		Node<ItemType>* quickSortRec(Node<ItemType>* head);
+		Node<ItemType>* quickSortRec(Node<ItemType>* head, Node<ItemType>* end);
 		Node<ItemType>* partition(Node<ItemType>* head, Node<ItemType>** frontRef, 
 			Node<ItemType>** backRef);
+		Node<ItemType>* getTail(Node<ItemType>* current);
 		// --------------------------------------------------------------
 
 		int getCurrentSize() const;
