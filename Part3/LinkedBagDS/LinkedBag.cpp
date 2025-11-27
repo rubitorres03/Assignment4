@@ -45,7 +45,7 @@ Node<ItemType>* LinkedBag<ItemType>::partition(Node<ItemType>* head, Node<ItemTy
 		while (curr != nullptr){
 			if (curr->getItem() < pivot->getItem()){
 				// move curr to head
-				if (*newHead == nullptr){
+				if (*newHead == nullptr)
 					*newHead = curr;
 				
 				prev = curr;
@@ -53,9 +53,10 @@ Node<ItemType>* LinkedBag<ItemType>::partition(Node<ItemType>* head, Node<ItemTy
 
 			} else {
 				// move curr to tail
-				if (prev != nullptr){
+				if (prev != nullptr) {
 					prev->setNext(curr->getNext());
-				else 
+				}
+				else {
 					head = curr->getNext();
 		    }
 
@@ -63,6 +64,7 @@ Node<ItemType>* LinkedBag<ItemType>::partition(Node<ItemType>* head, Node<ItemTy
 				curr->setNext(nullptr);
 				tail->setNext(curr);
 				tail = curr;
+
 				curr = temp;
 			}
 		}
