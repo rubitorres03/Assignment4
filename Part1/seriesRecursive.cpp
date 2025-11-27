@@ -6,7 +6,7 @@
 //      Hint: it should return a long long (integer)
 
 long long seriesRecursive(int n) {
-    // Base case
+    // Base case for J(0), J(1), and J(2)
     if (n == 0) {
         return 0;
     }
@@ -14,7 +14,7 @@ long long seriesRecursive(int n) {
         return 1;
     }
 
-    // Recursive case
+    // Recursive case for J(n)
     return seriesRecursive(n - 1) + 2 * seriesRecursive(n-2) + 4 * seriesRecursive(n-3);
 }
 
