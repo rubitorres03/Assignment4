@@ -57,7 +57,7 @@ Node<ItemType>* LinkedBag<ItemType>::partition(Node<ItemType>* head, Node<ItemTy
 					prev->setNext(curr->getNext());
 				else 
 					head = curr->getNext();
-		}
+		    }
 
 				Node<ItemType>* temp = curr->getNext();
 				curr->setNext(nullptr);
@@ -87,8 +87,8 @@ Node<ItemType>* LinkedBag<ItemType>::quickSortRec(Node<ItemType>* head, Node<Ite
 		// Recursively sort the list before the pivot
 		while (temp->getNext() != pivot){
 			temp = temp->getNext();
-		}
-		temp->setNext(nullptr);
+			temp->setNext(nullptr);
+	}
 		newHead = quickSortRec(newHead, temp);
 
 		// Connect sorted part to pivot
