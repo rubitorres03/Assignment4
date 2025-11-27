@@ -28,6 +28,7 @@ void LinkedBag<ItemType>::sort(int method){
 //TO DO: implement merge sort and change its prototype if you need to.
 template<class ItemType>
 void LinkedBag<ItemType>::mergeSort(){
+	
 
 
 }
