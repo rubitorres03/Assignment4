@@ -28,9 +28,49 @@ void LinkedBag<ItemType>::sort(int method){
 //TO DO: implement merge sort and change its prototype if you need to.
 template<class ItemType>
 void LinkedBag<ItemType>::mergeSort(){
-	
+	headPtr = mergeSortRec(headPtr);
 
 
+}
+
+template<class ItemType>	//merge sort recursive 
+Node<ItemType>* LinkedBag<ItemType>::mergeSortRec(Node<ItemType>* head){
+	if (head == nullptr || head->getNext() == nullptr){		//base case 0
+		return head;
+	}
+
+	//split list into two halves
+	Node<ItemType>* slow = head;
+	Node<ItemType>* fast = head->getNext();
+	while. (fast != nullptr && fast->getNext != nullptr){
+		slow = slow->getNext();
+		fast = fast->getNext()->getNext();
+	}
+
+	//slow before middle node
+	Node<ItemType>* mid = slow->getNext();
+	slow->setNext(nullptr);
+
+	Node<ItemType>* left = mergeSortRec(head);
+	Node<ItemType>* right = mergeSortRec(mid);
+
+	return mergeLists(left, right);
+}
+
+//merge two sorted lists
+template<class ItemType>
+Node<ItemType>* LinkedBag<ItemType>::mergeLists(Node<ItemType>* a, Node<ItemType>* b){
+	if (a == nullptr) return b;
+	if (b == nullptr) return a;
+	Node<ItemType>* result = nullptr;
+	if (a->getItem() <= b->getItem()){
+		result = a;
+		result->setNext(mergeLists(a->getNext(), b));
+	} else{
+		result = b;
+		result->setNext(mergeLists(a, b->getNext()));
+	} 
+	return result;
 }
 
 //Extra Credit -- TO DO: implement quick sort and change its prototype 
@@ -239,5 +279,6 @@ Node<ItemType>* LinkedBag<ItemType>::getPointerTo(const ItemType& anEntry) const
 	
 	return curPtr;
 } // end getPointerTo
+template class LinkedBag<int>;
 
 
